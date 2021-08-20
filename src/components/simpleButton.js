@@ -6,7 +6,7 @@ const SimpleButton = () =>
 	<button
 		onClick={ () => context.actions.increaseCount(config.increment) }
 	>
-		Click Me!
+		Add
 	</button>;
 
 export default SimpleButton;

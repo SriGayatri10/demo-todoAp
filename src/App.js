@@ -1,18 +1,18 @@
 import { React, useEffect } from 'react';
 import './App.scss';
-import context from './core/context';
+// import context from './core/context';
 import SampleService from './services/sample';
 import SimpleButton from './components/simpleButton';
+import Textbox from './components/textBox';
 
 const App = () => {
 	useEffect(SampleService.sayHai, []);
 
 	return (
-		<div className="App">
-			<div>Count: { context.state.count }</div>
-			<div>{ SimpleButton() }</div>
-			<div>Refresh ID: { context.state.refreshID }</div>
-		</div>
+		<span className="App">
+			<span>{ Textbox() }</span>
+			<span>{ SimpleButton() }</span>
+		</span>
 	);
 };
 
