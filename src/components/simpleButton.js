@@ -1,10 +1,13 @@
 import { React } from 'react';
-import config from '../core/config';
+// import config from '../core/config';
 import context from '../core/context';
 
 const SimpleButton = () =>
 	<button
-		onClick={ () => context.actions.increaseCount(config.increment) }
+		onClick={ () => {
+			context.actions.todo();
+			// context.actions.input('');
+		} }
 	>
 		Add
 	</button>;
