@@ -9,7 +9,7 @@ import todoDisplay from './components/todoDisplay';
 
 const App = () => {
 	console.log(context.state);
-	// console.log(context.state.todo);
+	console.log(context.state.todo);
 	return <span className="text-box">
 		<span>{Input()}</span>
 		<span>{SimpleButton()}</span>
