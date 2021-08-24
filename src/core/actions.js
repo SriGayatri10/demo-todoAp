@@ -3,7 +3,7 @@ const input = ({ data }) => ({
 });
 
 const todo = ({ state }) => ({
-	todo: state.todo.concat(state.input),
+	todo: state.todo.concat({ id: Date.now(), text: state.input }),
 });
 const actions = {
 	input,
