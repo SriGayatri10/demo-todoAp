@@ -2,7 +2,7 @@
 import config from './config';
 import { rndString } from '@laufire/utils/random';
 
-const input = ({ data }) => ({
+const setInput = ({ data }) => ({
 	input: data,
 });
 
@@ -16,7 +16,7 @@ const todo = ({ state }) => ({
 			isCompleted: state.isCompleted }),
 });
 const actions = {
-	input,
+	setInput,
 	todo,
 	checkbox,
 

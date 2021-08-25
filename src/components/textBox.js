@@ -9,7 +9,7 @@ const Input = () =>
 		onChange={ (evt) =>
 		// console.log(evt);
 
-			 context.actions.input(evt.target.value) }
+			 context.actions.setInput(evt.target.value) }
 	/>;
 
 export default Input;
