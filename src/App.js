@@ -6,6 +6,7 @@ import context from './core/context';
 import Input from './components/textBox';
 import SimpleButton from './components/simpleButton';
 import todoDisplay from './components/todoDisplay';
+import Checkbox from './components/Checkbox';
 
 const App = () => {
 	console.log(context.state);
@@ -15,6 +16,7 @@ const App = () => {
 		<span>{SimpleButton()}</span>
 		<div> input: { context.state.input } </div>
 		<div> Todos: { context.state.todo.map(todoDisplay) }</div>
+		<div> {Checkbox()} </div>
 	</span>;
 };
 
