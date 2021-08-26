@@ -6,10 +6,12 @@ import context from '../core/context';
 const Input = () =>
 	<input
 		type="text"
-		onChange={ (evt) =>
-		// console.log(evt);
+		value={ context.state.input }
+		onChange={ (evt) => {
+			 console.log(evt);
 
-			 context.actions.setInput(evt.target.value) }
+			 context.actions.setInput(evt.target.value);
+		} }
 	/>;
 
 export default Input;
