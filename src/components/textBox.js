@@ -3,10 +3,10 @@
 import { React } from 'react';
 import context from '../core/context';
 
-const Input = () =>
+const textBox = () =>
 	<input
 		type="text"
-		value={ context.state.input }
+		 value={ context.state.input }
 		onChange={ (evt) => {
 			 console.log(evt);
 
@@ -14,4 +14,4 @@ const Input = () =>
 		} }
 	/>;
 
-export default Input;
+export default textBox;
