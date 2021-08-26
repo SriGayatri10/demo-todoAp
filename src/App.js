@@ -4,19 +4,17 @@ import { React } from 'react';
 import './App.scss';
 import context from './core/context';
 import Input from './components/textBox';
-import SimpleButton from './components/simpleButton';
+import AddButton from './components/addButton';
 import todoDisplay from './components/todoDisplay';
-import Checkbox from './components/Checkbox';
 
 const App = () => {
 	console.log(context.state);
-	console.log(context.state.todo);
+	console.log(context.state.todos);
 	return <span className="text-box">
 		<span>{Input()}</span>
-		<span>{SimpleButton()}</span>
+		<span>{AddButton()}</span>
 		<div> input: { context.state.input } </div>
-		<div> Todos: { context.state.todo.map(todoDisplay) }</div>
-		<div> {Checkbox()} </div>
+		<div> Todos: { context.state.todos.map(todoDisplay) }</div>
 	</span>;
 };
 
