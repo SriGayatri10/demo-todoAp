@@ -5,8 +5,7 @@ const seed = {
 	count: config.countStart,
 	refreshID: rndString(config.refreshIDLength),
 	input: '',
-	todo: [],
-	isCompleted: false,
+	todos: [],
 };
 
 export default seed;
