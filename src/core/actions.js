@@ -1,24 +1,17 @@
 /* eslint-disable eqeqeq */
-import config from './config';
-import { rndString } from '@laufire/utils/random';
+import TodoManager from '../services/todoManager';
 
 const setInput = ({ data }) => ({
 	input: data,
 });
 
-const checkbox = ({ data }) => ({
-	isCompleted: data != 0,
-});
-
-const todo = ({ state }) => ({
-	todo: state.todo
-		.concat({ id: rndString(config.refreshIDLength), text: state.input,
-			isCompleted: state.isCompleted }),
+const addTodo = ({ state }) => ({
+	todos: TodoManager.addTodo(state),
+	input: '',
 });
 const actions = {
 	setInput,
-	todo,
-	checkbox,
+	addTodo,
 
 };
 
