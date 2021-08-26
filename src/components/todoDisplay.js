@@ -7,7 +7,7 @@ const todoDisplay = (data) =>
 			type="checkbox"
 			checked={ data.isCompleted }
 		/>
-		<span>{data.text} {data.isCompleted}</span>
+		<span>{data.text}</span>
 	</div>;
 
 export default todoDisplay;
