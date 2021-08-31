@@ -1,13 +1,14 @@
-/* eslint-disable react/void-dom-elements-no-children */
 import { React } from 'react';
+import context from '../core/context';
 
-const todoDisplay = (data) =>
-	<div key={ data.id }>
+const todoDisplay = (todo) =>
+	<div key={ todo.id }>
 		<input
 			type="checkbox"
-			checked={ data.isCompleted }
+			checked={ todo.isCompleted }
+			onChange={ () => context.actions.toggleTodo(todo) }
 		/>
-		<span>{data.text}</span>
+		<span>{todo.text} </span>
 	</div>;
 
 export default todoDisplay;
