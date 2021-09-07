@@ -4,9 +4,9 @@ import { React } from 'react';
 import './App.scss';
 import context from './core/context';
 import AddButton from './components/addButton';
-import todoDisplay from './components/todoDisplay';
 import textBox from './components/textBox';
 import toggleAll from './components/toggleAll';
+import todoList from './components/todoList';
 
 const App = () => {
 	console.log(context.state);
@@ -16,7 +16,7 @@ const App = () => {
 		<span>{textBox()}</span>
 		<span>{AddButton()}</span>
 		<div> input: { context.state.input } </div>
-		<div> Todos: { context.state.todos.map(todoDisplay) }</div>
+		<div> Todos: {todoList()}</div>
 	</span>;
 };
 
