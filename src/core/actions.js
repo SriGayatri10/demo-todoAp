@@ -21,12 +21,17 @@ const removeTodo = ({ state, data }) => ({
 	todos: TodoManager.removeTodo(state.todos, data),
 });
 
+const getClearCompleted = ({ state }) => ({
+	todos: TodoManager.clearCompleted(state.todos),
+});
+
 const actions = {
 	setInput,
 	addTodo,
 	toggleTodo,
 	toggleAllTodos,
 	removeTodo,
+	getClearCompleted,
 };
 
 export default actions;
