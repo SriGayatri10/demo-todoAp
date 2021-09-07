@@ -11,7 +11,7 @@ const clearCompleted = () => {
 		? null
 		: <button onClick={ () =>
 			context.actions.getClearCompleted() }
-		  >completed</button>;
+		  >clearcompleted</button>;
 };
 
 export default clearCompleted;
