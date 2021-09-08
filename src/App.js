@@ -7,6 +7,8 @@ import AddButton from './components/addButton';
 import textBox from './components/textBox';
 import toggleAll from './components/toggleAll';
 import todoList from './components/todoList';
+import filterBar from './components/filterBar';
+import clearCompleted from './components/clearCompleted';
 
 const App = () => {
 	console.log(context.state);
@@ -17,6 +19,8 @@ const App = () => {
 		<span>{AddButton()}</span>
 		<div> input: { context.state.input } </div>
 		<div> Todos: {todoList()}</div>
+		<div> {filterBar()}</div>
+		<div> {clearCompleted()}</div>
 	</span>;
 };
 
