@@ -37,8 +37,8 @@ const getTodosCount = (data) => data.length;
 
 const filters = {
 	All: () => true,
-	Active: (todo) => !todo.completed,
-	Completed: (todo) => todo.completed,
+	Active: (todo) => !todo.isCompleted,
+	Completed: (todo) => todo.isCompleted,
 };
 
 const setFilter = (todos, filter) => todos.filter(filters[filter]);
