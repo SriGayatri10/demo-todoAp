@@ -5,12 +5,7 @@ import todoDisplay from './todoDisplay';
 
 const todoList = () => {
 	const { filter, todos } = context.state;
-
-	// console.log(filter);
-	// console.log(todos);
 	const filteredTodo = TodoManager.setFilter(todos, filter);
-
-	// console.log(filteredTodo);
 
 	return filteredTodo.map(todoDisplay);
 };
