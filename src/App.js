@@ -3,12 +3,12 @@
 import { React } from 'react';
 import './App.scss';
 import context from './core/context';
-import AddButton from './components/addButton';
 import textBox from './components/textBox';
 import toggleAll from './components/toggleAll';
 import todoList from './components/todoList';
 import filterBar from './components/filterBar';
 import clearCompleted from './components/clearCompleted';
+import actionButton from './components/actionButton';
 
 const App = () => {
 	console.log(context.state);
@@ -16,7 +16,7 @@ const App = () => {
 	return <span className="text-box">
 		<span>{toggleAll()}</span>
 		<span>{textBox()}</span>
-		<span>{AddButton()}</span>
+		<span>{actionButton()}</span>
 		<div> input: { context.state.input } </div>
 		<div> Todos: {todoList()}</div>
 		<div> {filterBar()}</div>
