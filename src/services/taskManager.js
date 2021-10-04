@@ -14,9 +14,12 @@ const init = () => {
 
 const addTask = (tasks, task) => tasks.concat(getTask(task));
 
+const removeTask = (tasks, data) => tasks.filter((task) => task.id !== data.id);
+
 const TaskManager = {
 	init,
 	addTask,
+	removeTask,
 };
 
 export default TaskManager;
