@@ -5,6 +5,7 @@ const addButton = (task) =>
 	<button
 		onClick={ () => {
 			context.actions.addTaskTodo(task);
+			context.actions.removeTask(task);
 		} }
 	> + </button>;
 
