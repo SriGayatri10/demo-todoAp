@@ -8,8 +8,10 @@ const addButton = (task) =>
 		} }
 	> + </button>;
 
-const removeButton = () =>
-	<button> x </button>;
+const removeButton = (task) =>
+	<button
+		onClick={ () => context.actions.removeTask(task) }
+	> x </button>;
 
 const Task = (task) => {
 	const { id, text } = task;
@@ -17,7 +19,7 @@ const Task = (task) => {
 	return <div key={ id }>
 		<span>{addButton(task)}</span>
 		<span>{text}</span>
-		<span>{removeButton()}</span></div>;
+		<span>{removeButton(task)}</span></div>;
 };
 
 export default Task;
