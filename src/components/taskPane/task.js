@@ -8,12 +8,16 @@ const addButton = (task) =>
 		} }
 	> + </button>;
 
+const removeButton = () =>
+	<button> x </button>;
+
 const Task = (task) => {
 	const { id, text } = task;
 
 	return <div key={ id }>
 		<span>{addButton(task)}</span>
-		<span>{text}</span></div>;
+		<span>{text}</span>
+		<span>{removeButton()}</span></div>;
 };
 
 export default Task;
