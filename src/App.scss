@@ -5,7 +5,15 @@
 		font-weight: bold;
 	}
 }
-.text-box{
+.todoPane{
 	position:absolute;
-	left:50%;
+	top:0%;
+	left:20%;
+	height:100%;
+}
+.taskPane {
+	position:absolute;
+	top:0%;
+	right:20%;
+	height: 100%;
 }
