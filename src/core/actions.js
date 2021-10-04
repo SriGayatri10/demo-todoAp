@@ -6,7 +6,7 @@ const setInput = ({ data }) => ({
 });
 
 const addTodo = ({ state }) => ({
-	todos: TodoManager.addTodo(state),
+	todos: TodoManager.addTodo(state.todos, state.input),
 	input: '',
 });
 
@@ -47,6 +47,10 @@ const addTask = ({ state, data }) => ({
 	tasks: TaskManager.addTask(state.tasks, data),
 });
 
+const addTaskTodo = ({ state, data }) => ({
+	todos: TodoManager.addTodo(state.todos, data.text),
+});
+
 const actions = {
 	setInput,
 	addTodo,
@@ -58,6 +62,7 @@ const actions = {
 	setEditing,
 	editTodo,
 	addTask,
+	addTaskTodo,
 };
 
 export default actions;
