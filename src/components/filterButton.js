@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { React } from 'react';
 import context from '../core/context';
 import TodoManager from '../services/todoManager';

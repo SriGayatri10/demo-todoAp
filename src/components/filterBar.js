@@ -1,5 +1,3 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable no-console */
 import { React } from 'react';
 import filterButton from './filterButton.js';
 
