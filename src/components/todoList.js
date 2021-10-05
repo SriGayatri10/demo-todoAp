@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import context from '../core/context';
 import TodoManager from '../services/todoManager';
 import todoDisplay from './todoDisplay';
