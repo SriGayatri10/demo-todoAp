@@ -7,7 +7,7 @@ const toProperFormart = (txt) => txt.charAt(0).toUpperCase() + txt.substr(1);
 const getRndTask = () =>
 	toProperFormart(`${ faker.hacker.verb() } ${ faker.hacker.noun() }.`);
 
-const getTask = () => {
+const getTasks = () => {
 	const count = rndBetween(0, config.minimumTaskCount);
 	const tasks = [];
 
@@ -18,7 +18,7 @@ const getTask = () => {
 };
 
 const TaskRetriver = {
-	getTask,
+	getTasks,
 };
 
 export default TaskRetriver;
