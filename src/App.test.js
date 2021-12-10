@@ -1,20 +1,25 @@
-import { React } from 'react';
-import { render, screen } from '@testing-library/react';
+/* eslint-disable react/display-name */
+import React from 'react';
+import { render } from '@testing-library/react';
 
 // NOTE: automock from jest config doesn't work on apps created with create-react-app.
-jest.mock('./components/simpleButton');
-jest.mock('./core/context', () => ({
-	state: {
-		count: 0,
-		refreshID: 'ABCD',
-	},
-}));
+jest.mock('./components', () => () => <div role="todoPane"/>);
+jest.mock('./components/taskPane', () => () => <div role="taskPane"/>);
 
 import App from './App';
+import TaskManager from './services/taskManager';
+import Ticker from './services/ticker';
 
 test('renders learn react link', () => {
-	render(<App/>);
-	const someText = screen.getByText(/count/i);
+	jest.spyOn(React, 'useEffect');
+	jest.spyOn(Ticker, 'start').mockReturnValue();
+	jest.spyOn(TaskManager, 'init').mockReturnValue();
 
-	expect(someText).toBeInTheDocument();
+	const { getByRole } = render(<App/>);
+
+	expect(React.useEffect).toHaveBeenCalledWith(Ticker.start, []);
+	expect(React.useEffect).toHaveBeenCalledWith(TaskManager.init, []);
+
+	expect(getByRole('todoPane')).toBeInTheDocument();
+	expect(getByRole('taskPane')).toBeInTheDocument();
 });
