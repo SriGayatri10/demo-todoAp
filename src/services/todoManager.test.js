@@ -1,26 +1,48 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-lines-per-function */
-/* eslint-disable no-magic-numbers */
 import TodoManager from './todoManager';
 import { rndString } from '@laufire/utils/random';
 // eslint-disable-next-line max-statements
 describe('todoManager', () => {
 	const { addTodo, toggleTodo, toggleAllTodos, getActiveChecked,
 		getActiveTodos, removeTodo, getClearCompletedCount, clearCompleted,
-		getTodosCount, setFilter, editTodo } = TodoManager;
+		getTodosCount, setFilter, editTodo, toArray } = TodoManager;
+
+	const getId = () => Symbol('id');
+	const getText = () => Symbol('text');
+	const	existingTodoIdOne	= getId();
+	const	existingTodoIdTwo = getId();
+	const	existingTodoTextOne = getText() ;
+	const	existingTodoTextTwo = getText();
+
 	const existingTodos = [
-		{ id: rndString(16), text: 'hi', isCompleted: false },
-		{ id: rndString(16), text: 'hello', isCompleted: false },
+		{
+			id: existingTodoIdOne,
+			text: existingTodoTextOne,
+			isCompleted: false,
+		},
+		{
+			id: existingTodoIdTwo,
+			text: existingTodoTextTwo,
+			isCompleted: false,
+		},
 	];
 	const [impactedTodo, unImpactedTodo] = existingTodos;
 
 	test('Add Todo - adds the given todo', () => {
-		const result = addTodo(existingTodos, 'welcome');
+		const text = Symbol('welcome');
+		const result = addTodo(existingTodos, text);
+		const newTodo = {
+			id: expect.any(String),
+			text: text,
+			isCompleted: false,
+		 };
 
-		expect(result).toEqual([...existingTodos,
-			{ id: expect.any(String), text: 'welcome', isCompleted: false }]);
+		expect(result).toEqual([...existingTodos, newTodo]);
 	});
+
 	test('Toggle Todo', () => {
 		const expectation = [
 			{ ...impactedTodo, isCompleted: !impactedTodo.isCompleted },
@@ -73,14 +95,18 @@ describe('todoManager', () => {
 		expect(length).toEqual(2);
 	});
 	test('setFilter - set a particular filter which is required', () => {
+		const activeTodoId = getId();
+		const activeTodoText = getText();
+		const completedTodoId = getId();
+		const completedTodoText = getText();
 		const activeTodos = [{
-			id: rndString(16),
-			text: 'hi',
+			id: activeTodoId,
+			text: activeTodoText,
 			isCompleted: false,
 		}];
 		const completedTodos = [{
-			id: rndString(16),
-			text: 'hello',
+			id: completedTodoId,
+			text: completedTodoText,
 			isCompleted: true,
 		}];
 		const inputTodos = [...activeTodos, ...completedTodos];
@@ -106,7 +132,7 @@ describe('todoManager', () => {
 		});
 	});
 	test('EditTodo -  edit the existing todos present', () => {
-		const data = 'bye';
+		const data = Symbol('bye');
 		const result = editTodo(
 			existingTodos, impactedTodo, data
 		);
