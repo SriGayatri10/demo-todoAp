@@ -35,7 +35,7 @@ describe('todoManager', () => {
 
 	test('Add Todo - adds the given todo', () => {
 		const id = getId();
-		const text = Symbol('welcome');
+		const text = getText();
 		const newTodo = {
 			id: id,
 			text: text,
@@ -62,7 +62,7 @@ describe('todoManager', () => {
 	});
 
 	test('ToggleAllTodos - Updating  isCompleted', () => {
-		const isChecked = Symbol(true);
+		const isChecked = Symbol('true');
 		const results = toggleAllTodos(existingTodos, isChecked);
 
 		results.map((result, index) => {
@@ -73,15 +73,18 @@ describe('todoManager', () => {
 	});
 
 	test('getActiveChecked - Getting No of activeTodos present', () => {
+		const inactiveTodosCount = (todos) =>
+			todos.filter((todo) => todo.isCompleted).length;
+		const activeTodosCount = existingTodos.length - inactiveTodosCount(existingTodos);
 		const noOfActiveTodos = getActiveChecked(existingTodos);
 
-		expect(noOfActiveTodos).toEqual(2);
+		expect(noOfActiveTodos).toEqual(activeTodosCount);
 	});
 
 	test('Obtaining length of activeTodos', () => {
 		const length = getActiveTodos(existingTodos);
 
-		expect(length).toEqual(2);
+		expect(length).toEqual(existingTodos.length);
 	});
 
 	test('Remove Todo - removes the selected todo', () => {
@@ -91,9 +94,12 @@ describe('todoManager', () => {
 	});
 
 	test('CompletedCount - gets the count of clearCompleted', () => {
+		const activeTodosCount = (todos) =>
+			todos.filter((todo) => !todo.isCompleted).length;
+		const inactiveTodosCount = existingTodos.length - activeTodosCount(existingTodos);
 		const length = completedCount(existingTodos);
 
-		expect(length).toEqual(0);
+		expect(length).toEqual(inactiveTodosCount);
 	});
 
 	test('Clear Completed', () => {
@@ -105,8 +111,9 @@ describe('todoManager', () => {
 	test('TodosCount- Count the no of todos', () => {
 		const length = getTodosCount(existingTodos);
 
-		expect(length).toEqual(2);
+		expect(length).toEqual(existingTodos.length);
 	});
+
 	test('setFilter - set a particular filter which is required', () => {
 		const activeTodoId = getId();
 		const activeTodoText = getText();
@@ -144,6 +151,7 @@ describe('todoManager', () => {
 			expect(result).toEqual(todos);
 		});
 	});
+
 	test('EditTodo -  edit the existing todos present', () => {
 		const data = Symbol('bye');
 		const result = editTodo(
