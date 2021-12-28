@@ -3,12 +3,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-lines-per-function */
 import TodoManager from './todoManager';
-import { rndString } from '@laufire/utils/random';
+import { random } from '@laufire/utils';
+import config from '../core/config';
+
 // eslint-disable-next-line max-statements
 describe('todoManager', () => {
 	const { addTodo, toggleTodo, toggleAllTodos, getActiveChecked,
-		getActiveTodos, removeTodo, getClearCompletedCount, clearCompleted,
-		getTodosCount, setFilter, editTodo, toArray } = TodoManager;
+		getActiveTodos, removeTodo, completedCount, clearCompleted,
+		getTodosCount, setFilter, editTodo } = TodoManager;
 
 	const getId = () => Symbol('id');
 	const getText = () => Symbol('text');
@@ -32,14 +34,19 @@ describe('todoManager', () => {
 	const [impactedTodo, unImpactedTodo] = existingTodos;
 
 	test('Add Todo - adds the given todo', () => {
+		const id = getId();
 		const text = Symbol('welcome');
-		const result = addTodo(existingTodos, text);
 		const newTodo = {
-			id: expect.any(String),
+			id: id,
 			text: text,
 			isCompleted: false,
-		 };
+		};
 
+		jest.spyOn(random, 'rndString').mockReturnValue(id);
+
+		const result = addTodo(existingTodos, text);
+
+		expect(random.rndString).toHaveBeenCalledWith(config.refreshIDLength);
 		expect(result).toEqual([...existingTodos, newTodo]);
 	});
 
@@ -53,8 +60,9 @@ describe('todoManager', () => {
 
 		expect(result).toEqual(expectation);
 	});
+
 	test('ToggleAllTodos - Updating  isCompleted', () => {
-		const isChecked = true;
+		const isChecked = Symbol(true);
 		const results = toggleAllTodos(existingTodos, isChecked);
 
 		results.map((result, index) => {
@@ -63,11 +71,13 @@ describe('todoManager', () => {
 			});
 		});
 	});
+
 	test('getActiveChecked - Getting No of activeTodos present', () => {
 		const noOfActiveTodos = getActiveChecked(existingTodos);
 
 		expect(noOfActiveTodos).toEqual(2);
 	});
+
 	test('Obtaining length of activeTodos', () => {
 		const length = getActiveTodos(existingTodos);
 
@@ -79,16 +89,19 @@ describe('todoManager', () => {
 
 		expect(afterTodoRemoval).toEqual([unImpactedTodo]);
 	});
-	test('clearCompletedCount - gets the count of clearCompleted', () => {
-		const length = getClearCompletedCount(existingTodos);
+
+	test('CompletedCount - gets the count of clearCompleted', () => {
+		const length = completedCount(existingTodos);
 
 		expect(length).toEqual(0);
 	});
+
 	test('Clear Completed', () => {
 		const clearcompleted = clearCompleted(existingTodos);
 
 		expect(clearcompleted).toEqual(existingTodos);
 	});
+
 	test('TodosCount- Count the no of todos', () => {
 		const length = getTodosCount(existingTodos);
 
@@ -138,7 +151,7 @@ describe('todoManager', () => {
 		);
 		const expectation = [
 			{ ...impactedTodo, text: data },
-			unImpactedTodo,
+			existingTodos[1],
 		];
 
 		expect(result).toEqual(expectation);

@@ -1,8 +1,8 @@
 import config from '../core/config';
-import { rndString } from '@laufire/utils/random';
+import * as random from '@laufire/utils/random';
 
 const addTodo = (todos, input) => todos.concat({
-	id: rndString(config.refreshIDLength),
+	id: random.rndString(config.refreshIDLength),
 	text: input,
 	isCompleted: false,
 });
@@ -26,7 +26,7 @@ const getActiveTodos = (todos) => todos.length;
 const removeTodo = (todos, todoTobeRemoved) =>
 	todos.filter((todo) => todo.id !== todoTobeRemoved.id);
 
-const getClearCompletedCount = (todos) =>
+const completedCount = (todos) =>
 	todos.filter((todo) => todo.isCompleted).length;
 
 const clearCompleted = (todos) =>
@@ -59,7 +59,7 @@ const TodoManager = {
 	getActiveTodos,
 	getActiveChecked,
 	removeTodo,
-	getClearCompletedCount,
+	completedCount,
 	clearCompleted,
 	getTodosCount,
 	setFilter,
