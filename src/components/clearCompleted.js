@@ -4,7 +4,7 @@ import context from '../core/context';
 import TodoManager from '../services/todoManager';
 
 const clearCompleted = () => {
-	const notCompleted = TodoManager.getClearCompletedCount(context.state.todos)
+	const notCompleted = TodoManager.getCompletedCount(context.state.todos)
 	 === 0;
 
 	return notCompleted

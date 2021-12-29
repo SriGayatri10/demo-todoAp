@@ -9,7 +9,7 @@ import config from '../core/config';
 // eslint-disable-next-line max-statements
 describe('todoManager', () => {
 	const { addTodo, toggleTodo, toggleAllTodos, getActiveChecked,
-		getActiveTodos, removeTodo, completedCount, clearCompleted,
+		getActiveTodos, removeTodo, getCompletedCount, clearCompleted,
 		getTodosCount, setFilter, editTodo } = TodoManager;
 
 	const getId = () => Symbol('id');
@@ -97,7 +97,7 @@ describe('todoManager', () => {
 		const activeTodosCount = (todos) =>
 			todos.filter((todo) => !todo.isCompleted).length;
 		const inactiveTodosCount = existingTodos.length - activeTodosCount(existingTodos);
-		const length = completedCount(existingTodos);
+		const length = getCompletedCount(existingTodos);
 
 		expect(length).toEqual(inactiveTodosCount);
 	});
