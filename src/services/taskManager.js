@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import context from '../core/context';
-import { rndString } from '@laufire/utils/random';
+import { random } from '@laufire/utils';
 
 const getTask = (text) => ({
-	id: rndString(context.config.idLength),
+	id: random.rndString(context.config.idLength),
 	text: text,
 });
 
