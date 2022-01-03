@@ -28,6 +28,8 @@ describe('taskManager', () => {
 		},
 	];
 
+	const [impactedTask, unImpactedTask] = existingTasks;
+
 	test('Add Task', () => {
 		const id = getId();
 		const text = getText();
@@ -45,8 +47,8 @@ describe('taskManager', () => {
 	});
 
 	test('Remove Task - removes the selected task', () => {
-		const afterTaskRemoval = removeTask(existingTasks, existingTasks[0]);
+		const afterTaskRemoval = removeTask(existingTasks, impactedTask);
 
-		expect(afterTaskRemoval).toEqual([existingTasks[1]]);
+		expect(afterTaskRemoval).toEqual([unImpactedTask]);
 	});
 });
