@@ -17,9 +17,6 @@ test('renders learn react link', () => {
 
 	const { getByRole } = render(<App/>);
 
-	expect(React.useEffect).toHaveBeenCalledWith(Ticker.start, []);
-	expect(React.useEffect).toHaveBeenCalledWith(TaskManager.init, []);
-
 	expect(getByRole('todoPane')).toBeInTheDocument();
 	expect(getByRole('taskPane')).toBeInTheDocument();
 });
