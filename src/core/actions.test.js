@@ -1,9 +1,9 @@
+/* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import actions from './actions';
 import TodoManager from '../services/todoManager';
 import TaskManager from '../services/taskManager';
 
-// eslint-disable-next-line max-statements
 describe('actions', () => {
 	const {	setInput, addTodo, toggleTodo, toggleAllTodos, removeTodo,
 		getClearCompleted, setFilter, setEditing, addTask,

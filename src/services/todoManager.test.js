@@ -1,12 +1,9 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import TodoManager from './todoManager';
 import { random } from '@laufire/utils';
 import config from '../core/config';
 
-// eslint-disable-next-line max-statements
 describe('todoManager', () => {
 	const { addTodo, toggleTodo, toggleAllTodos, getActiveChecked,
 		getActiveTodos, removeTodo, getCompletedCount, clearCompleted,
@@ -67,7 +64,7 @@ describe('todoManager', () => {
 
 		results.map((result, index) => {
 			expect(result).toEqual({
-				 ...existingTodos[index], isCompleted: isChecked,
+				...existingTodos[index], isCompleted: isChecked,
 			});
 		});
 	});
@@ -75,7 +72,8 @@ describe('todoManager', () => {
 	test('getActiveChecked - Getting No of activeTodos present', () => {
 		const inactiveTodosCount = (todos) =>
 			todos.filter((todo) => todo.isCompleted).length;
-		const activeTodosCount = existingTodos.length - inactiveTodosCount(existingTodos);
+		const activeTodosCount = existingTodos.length
+		- inactiveTodosCount(existingTodos);
 		const noOfActiveTodos = getActiveChecked(existingTodos);
 
 		expect(noOfActiveTodos).toEqual(activeTodosCount);
@@ -96,7 +94,8 @@ describe('todoManager', () => {
 	test('CompletedCount - gets the count of clearCompleted', () => {
 		const activeTodosCount = (todos) =>
 			todos.filter((todo) => !todo.isCompleted).length;
-		const inactiveTodosCount = existingTodos.length - activeTodosCount(existingTodos);
+		const inactiveTodosCount = existingTodos.length
+		- activeTodosCount(existingTodos);
 		const length = getCompletedCount(existingTodos);
 
 		expect(length).toEqual(inactiveTodosCount);
@@ -134,14 +133,14 @@ describe('todoManager', () => {
 			{
 				filter: 'All',
 				todos: inputTodos,
-			 },
+			},
 			{
 				filter: 'Active',
 				todos: activeTodos,
-			 },
+			},
 			{
 				filter: 'Completed',
-			 	todos: completedTodos,
+				todos: completedTodos,
 			},
 		];
 
