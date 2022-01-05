@@ -1,14 +1,11 @@
-/* eslint-disable max-len */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
-/* eslint-disable no-magic-numbers */
-
 import TaskManager from './taskManager';
 import { random } from '@laufire/utils';
 import config from '../core/config';
 
 describe('taskManager', () => {
-	const { addTask, removeTask } = TaskManager;
+	const { addTask, removeTask, init } = TaskManager;
 
 	const getId = () => Symbol('id');
 	const getText = () => Symbol('text');
@@ -50,5 +47,21 @@ describe('taskManager', () => {
 		const afterTaskRemoval = removeTask(existingTasks, impactedTask);
 
 		expect(afterTaskRemoval).toEqual([unImpactedTask]);
+	});
+
+	test('Init - initiate the task', () => {
+		const context = {
+			actions: {
+				addTask: () => {},
+			},
+		};
+
+		jest.spyOn(context.actions, 'addTask');
+
+		init(context);
+		const tasks = ['Task1', 'Task2', 'Task3'];
+
+		tasks.map((task) => expect(context.actions.addTask)
+			.toHaveBeenCalledWith(task));
 	});
 });

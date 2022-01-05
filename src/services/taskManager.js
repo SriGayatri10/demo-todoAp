@@ -1,13 +1,12 @@
-/* eslint-disable no-console */
-import context from '../core/context';
+import config from '../core/config';
 import { random } from '@laufire/utils';
 
 const getTask = (text) => ({
-	id: random.rndString(context.config.idLength),
+	id: random.rndString(config.idLength),
 	text: text,
 });
 
-const init = () => {
+const init = (context) => {
 	context.actions.addTask('Task1');
 	context.actions.addTask('Task2');
 	context.actions.addTask('Task3');
