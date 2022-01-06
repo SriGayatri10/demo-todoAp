@@ -1,7 +1,16 @@
 import TaskRetriver from './taskRetriver';
+import { random } from '@laufire/utils';
+import config from '../core/config';
 
-const { getTasks } = TaskRetriver;
+test('GetTasks - get the tasks', () => {
+	const count = 2;
 
-test('GetTask - gets the task', () => {
+	jest.spyOn(TaskRetriver, 'getTasks');
+	jest.spyOn(random, 'rndBetween').mockReturnValue(count);
 
+	const tasks = TaskRetriver.getTasks();
+
+	expect(random.rndBetween).toHaveBeenCalledWith(0, config.minimumTaskCount);
+	expect(tasks.length).toEqual(count);
+	tasks.map(() => expect.any(String));
 });
