@@ -1,14 +1,14 @@
 import faker from 'faker';
-import { rndBetween } from '@laufire/utils/random';
+import * as random from '@laufire/utils/random';
 import config from '../core/config';
 
-const toProperFormart = (txt) => txt.charAt(0).toUpperCase() + txt.substr(1);
+const toProperFormat = (txt) => txt.charAt(0).toUpperCase() + txt.substr(1);
 
 const getRndTask = () =>
-	toProperFormart(`${ faker.hacker.verb() } ${ faker.hacker.noun() }.`);
+	toProperFormat(`${ faker.hacker.verb() } ${ faker.hacker.noun() }.`);
 
 const getTasks = () => {
-	const count = rndBetween(0, config.minimumTaskCount);
+	const count = random.rndBetween(0, config.minimumTaskCount);
 	const tasks = [];
 
 	for(let i = 0; i < count; i++)
