@@ -7,46 +7,41 @@ import config from '../core/config';
 describe('taskManager', () => {
 	const { addTask, removeTask, init } = TaskManager;
 
-	const getId = () => Symbol('id');
-	const getText = () => Symbol('text');
-	const	existingTaskIdOne	= getId();
-	const	existingTaskIdTwo = getId();
-	const	existingTaskTextOne = getText() ;
-	const	existingTaskTextTwo = getText();
-
 	const existingTasks = [
 		{
-			id: existingTaskIdOne,
-			text: existingTaskTextOne,
+			id: Symbol('id'),
+			text: Symbol('text'),
 		},
 		{
-			id: existingTaskIdTwo,
-			text: existingTaskTextTwo,
+			id: Symbol('id'),
+			text: Symbol('text'),
 		},
 	];
 
 	const [impactedTask, unImpactedTask] = existingTasks;
 
 	test('Add Task', () => {
-		const id = getId();
-		const text = getText();
+		const id = Symbol('id');
+		const text = Symbol('text');
 
 		jest.spyOn(random, 'rndString').mockReturnValue(id);
 
+		const expectation = [
+			...existingTasks,
+			{ id, text },
+		];
 		const result = addTask(existingTasks, text);
 
 		expect(random.rndString).toHaveBeenCalledWith(config.idLength);
 
-		expect(result).toEqual([
-			...existingTasks,
-			{ id, text },
-		]);
+		expect(result).toEqual(expectation);
 	});
 
 	test('Remove Task - removes the selected task', () => {
-		const afterTaskRemoval = removeTask(existingTasks, impactedTask);
+		const expectation = [unImpactedTask];
+		const result = removeTask(existingTasks, impactedTask);
 
-		expect(afterTaskRemoval).toEqual([unImpactedTask]);
+		expect(result).toEqual(expectation);
 	});
 
 	test('Init - initiate the task', () => {
@@ -55,11 +50,11 @@ describe('taskManager', () => {
 				addTask: () => {},
 			},
 		};
+		const tasks = ['Task1', 'Task2', 'Task3'];
 
 		jest.spyOn(context.actions, 'addTask');
 
 		init(context);
-		const tasks = ['Task1', 'Task2', 'Task3'];
 
 		tasks.map((task) => expect(context.actions.addTask)
 			.toHaveBeenCalledWith(task));
