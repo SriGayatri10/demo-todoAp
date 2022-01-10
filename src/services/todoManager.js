@@ -1,11 +1,14 @@
 import config from '../core/config';
 import * as random from '@laufire/utils/random';
 
-const addTodo = (todos, input) => todos.concat({
-	id: random.rndString(config.refreshIDLength),
-	text: input,
-	isCompleted: false,
-});
+// eslint-disable-next-line arrow-body-style
+const addTodo = (todos, input) => {
+	return todos.concat({
+		id: random.rndString(config.refreshIDLength),
+		text: input,
+		isCompleted: false,
+	});
+};
 
 const toggleTodo = (todos, data) => todos.map((todo) =>
 	(todo.id !== data.id
@@ -21,7 +24,10 @@ const toggleAllTodos = (todos, ischecked) =>
 const getActiveChecked = (todos) =>
 	todos.filter((todo) => !todo.isCompleted).length;
 
-const getActiveTodos = (todos) => todos.length;
+// eslint-disable-next-line arrow-body-style
+const getActiveTodos = (todos) => {
+	return todos.length;
+};
 
 const removeTodo = (todos, todoTobeRemoved) =>
 	todos.filter((todo) => todo.id !== todoTobeRemoved.id);
