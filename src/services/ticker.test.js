@@ -1,8 +1,21 @@
+/* eslint-disable no-console */
 import TaskRetriver from './taskRetriver';
 import Ticker from './ticker';
+import config from '../core/config';
 
 test('Ticker ', () => {
-	jest.spyOn(TaskRetriver, 'getTasks');
+	const addTask = Symbol('addTask');
+	const context = {	actions: {	addTask }};
+	const tasks = { map: jest.fn() };
+	const setIntervalMock = (fn) => fn();
 
-	Ticker.start();
+	jest.spyOn(TaskRetriver, 'getTasks').mockReturnValue(tasks);
+	jest.spyOn(global, 'setInterval').mockImplementation(setIntervalMock);
+
+	Ticker.start(context);
+
+	expect(global.setInterval)
+		.toHaveBeenCalledWith(expect.any(Function), config.tickerDelay);
+	expect(TaskRetriver.getTasks).toHaveBeenCalledWith();
+	expect(tasks.map).toHaveBeenCalledWith(addTask);
 });

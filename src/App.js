@@ -9,7 +9,7 @@ import context from './core/context';
 
 const App = () => {
 	useEffect(() => TaskManager.init(context), []);
-	useEffect(Ticker.start, []);
+	useEffect(() => Ticker.start(context), []);
 	  return <div>
 		<span>{ TodoPane()}</span>
 		<span>{TaskPane()}</span>
