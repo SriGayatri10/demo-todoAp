@@ -4,8 +4,11 @@ import TaskRetriver from './taskRetriver';
 const start = (context) => {
 	const { tickerDelay } = config;
 	const { addTask } = context.actions;
+	const { fn } = context;
 
-	setInterval(() => TaskRetriver.getTasks().map(addTask), tickerDelay);
+	setInterval(() =>
+		TaskRetriver.getTasks().map(addTask)
+			.map(fn), tickerDelay);
 };
 
 const Ticker = {
