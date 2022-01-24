@@ -1,25 +1,30 @@
+/* eslint-disable no-console */
+/* eslint-disable max-nested-callbacks */
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-len */
 /* eslint-disable no-magic-numbers */
-/* eslint-disable no-console */
+
 /* eslint-disable max-statements */
 import PlayerManager from './playerManager';
 import { range } from '@laufire/utils/collection';
 
 // eslint-disable-next-line max-lines-per-function
 describe('PlayerManager ', () => {
+	const { randomNumber, randomCharacter, character } = PlayerManager;
+
 	test('RndNumber -  to get a random number', () => {
 		const max = Symbol('max');
 		const min = Symbol('min');
-		const randomNumber = Symbol('randomNumber');
+		const rndNumber = Symbol('rndNumber');
 		const expectation = Symbol('expectation');
 
-		jest.spyOn(Math, 'random').mockReturnValue(randomNumber);
+		jest.spyOn(Math, 'random').mockReturnValue(rndNumber);
 		jest.spyOn(Math, 'floor').mockReturnValue(expectation);
 
 		const result = PlayerManager.rndNumber(max, min);
 
 		expect(result).toEqual(expectation);
-		expect(Math.floor).toHaveBeenCalledWith(randomNumber);
+		expect(Math.floor).toHaveBeenCalledWith(rndNumber);
 		expect(Math.random).toHaveBeenCalledWith(min, max);
 	});
 	test('RandomNumber - to get a random number', () => {
@@ -43,35 +48,42 @@ describe('PlayerManager ', () => {
 
 	// eslint-disable-next-line max-lines-per-function
 	test('Randomized test', () => {
-		const arrayOfRandomNumbers = range(0, 100000)
-			.map(() => PlayerManager.randomNumber(0, 9));
-		const uniqueValues = arrayOfRandomNumbers
-			.filter((
-				value, index, array
-			) => array.indexOf(value) === index);
-		const count = (array, number) => array.filter((value) => number === value).length;
+		const minValue = 0;
+		const maxValue = 9;
+		const possibilities = range(minValue, maxValue);
+		const iterationCount = 100000;
+		const acceptableErrorMargin = 5 / 100;
+		const results = range(0, iterationCount).map(() => randomNumber(minValue, maxValue));
+		const counts = possibilities.map((possibility) =>
+		 results.filter((result) => result === possibility).length);
 
-		console.log(uniqueValues);
-		const dictionary = {};
+		const minCount = Math.min(...counts);
+		const maxCount = Math.max(...counts);
+		const difference = maxCount - minCount;
+		const obtainedErrorMargin = (difference / 2) * possibilities.length / iterationCount;
 
-		uniqueValues.forEach((value) => {
-			dictionary[value] = count(arrayOfRandomNumbers, value);
-		});
+		expect(obtainedErrorMargin).toBeLessThan(acceptableErrorMargin);
+	});
 
-		const valuesOfDictionary = range(0, 9).map((value) => dictionary[value]);
-		const minValue = Math.min(...valuesOfDictionary);
-		const maxValue = Math.max(...valuesOfDictionary);
+	test('Randomized test for character', () => {
+		const minValue = 65;
+		const maxValue = 90;
+		const possibilities = range(minValue, maxValue).map((number) => character(number));
+		const iterationCount = 100000;
+		const acceptableErrorMargin = 10 / 100;
+		const results = range(0, iterationCount).map(() => randomCharacter());
+		const counts = possibilities.map((possibility) =>
+		 results.filter((result) => result === possibility).length);
 
-		const minNoOfTimes = range(0, 9).filter((value) => dictionary[value] === minValue);
-		const maxNoOfTimes = range(0, 9).filter((value) => dictionary[value] === maxValue);
+		const minCount = Math.min(...counts);
+		const maxCount = Math.max(...counts);
+		const difference = maxCount - minCount;
+		const obtainedErrorMargin = (difference / 2) * possibilities.length / iterationCount;
 
-		console.log(
-			'number-', ...minNoOfTimes, 'count-', minValue
-		);
-		console.log(
-			'number-', ...maxNoOfTimes, 'count-', maxValue
-		);
+		console.log(results);
+		console.log(counts);
+		console.log(possibilities);
 
-		console.log(dictionary);
+		expect(obtainedErrorMargin).toBeLessThan(acceptableErrorMargin);
 	});
 });

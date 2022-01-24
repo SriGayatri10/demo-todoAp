@@ -14,24 +14,21 @@ const randomizedNumber = () => {
 		array.push(randomNumber(0, 100));
 	return array;
 };
+const randomCharacter = () => {
+	const number = randomNumber(65, 90);
+	const character = String.fromCharCode(number);
 
-const countOfFive = () => {
-	const arrayOfFive = [];
-	const array = randomizedNumber();
-
-	for(let i = 0; i < 10000; i++) {
-		if(array[i] === 5)
-			arrayOfFive.push(array[i]);
-	}
-
-	return arrayOfFive;
+	return character;
 };
+
+const character = (number) => String.fromCharCode(number);
 
 const PlayerManager = {
 	rndNumber,
 	randomNumber,
 	randomizedNumber,
-	countOfFive,
+	character,
+	randomCharacter,
 };
 
 export default PlayerManager;
