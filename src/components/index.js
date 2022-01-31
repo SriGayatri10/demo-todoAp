@@ -5,16 +5,22 @@ import actionButton from './actionButton';
 import todoList from './todoList';
 import filterBar from './filterBar';
 import clearCompleted from './clearCompleted';
-import context from '../core/context';
 
-const TodoPane = () => <span className="todoPane">
-	<span>{toggleAll()}</span>
-	<span>{textBox()}</span>
-	<span>{actionButton()}</span>
-	<div> input: { context.state.input } </div>
-	<div> Todos: {todoList()}</div>
-	<div> {filterBar()}</div>
-	<div> {clearCompleted()}</div>
-</span>;
+const TodoPane = (context) => {
+	const { state } = context;
+
+	return (
+		<span role="TodoPane" className="todoPane">
+			<span>{toggleAll(context)}</span>
+			<span>{textBox(context)}</span>
+			<span>{actionButton(context)}</span>
+			<div> input: { state.input } </div>
+			<div> Todos: {todoList(context)}</div>
+			<div> {filterBar(context)}</div>
+			<div> {clearCompleted(context)}</div>
+
+		</span>
+	);
+};
 
 export default TodoPane;

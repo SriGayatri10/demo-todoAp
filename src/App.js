@@ -5,14 +5,13 @@ import TaskManager from './services/taskManager';
 import TaskPane from './components/taskPane';
 import TodoPane from './components';
 import Ticker from './services/ticker';
-import context from './core/context';
 
-const App = () => {
+const App = (context) => {
 	useEffect(() => TaskManager.init(context), []);
 	useEffect(() => Ticker.start(context), []);
 	  return <div>
-		<span>{ TodoPane()}</span>
-		<span>{TaskPane()}</span>
+		<span>{ TodoPane(context)}</span>
+		<span>{TaskPane(context)}</span>
 	</div>;
 };
 
