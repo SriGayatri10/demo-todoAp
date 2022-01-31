@@ -27,5 +27,4 @@ test('Ticker ', () => {
 		.toHaveBeenCalledWith(expect.any(Function), config.tickerDelay);
 	expect(TaskRetriver.getTasks).toHaveBeenCalledWith();
 	expect(tasks.map).toHaveBeenCalledWith(addTask);
-	expect(addedTasks.map).toHaveBeenCalledWith(fn);
 });
