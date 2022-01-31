@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { React } from 'react';
 import context from '../core/context';
@@ -9,8 +10,11 @@ const clearCompleted = () => {
 
 	return notCompleted
 		? null
-		: <button onClick={ () =>
-			context.actions.getClearCompleted() }
+		: <button
+			role="clearCompleted"
+
+			onClick={ () =>
+				context.actions.getClearCompleted() }
 		  >clearcompleted</button>;
 };
 

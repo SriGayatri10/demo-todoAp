@@ -7,7 +7,7 @@ const filterButton = (filter) => {
 
 	return isTodos
 		? null
-		: <span>
+		: <span role="filterButton">
 			<button
 				onClick={ () => context.actions.setFilter(filter) }
 			>
