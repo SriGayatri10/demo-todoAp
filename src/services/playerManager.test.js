@@ -10,7 +10,7 @@ import { range } from '@laufire/utils/collection';
 
 // eslint-disable-next-line max-lines-per-function
 describe('PlayerManager ', () => {
-	const { randomNumber, randomCharacter, character } = PlayerManager;
+	const { randomNumber, randomCharacter, randomValue } = PlayerManager;
 
 	test('RndNumber -  to get a random number', () => {
 		const max = Symbol('max');
@@ -52,11 +52,12 @@ describe('PlayerManager ', () => {
 		const maxValue = 9;
 		const possibilities = range(minValue, maxValue);
 		const iterationCount = 100000;
-		const acceptableErrorMargin = 5 / 100;
+		const acceptableErrorMargin = 0.05;
+
 		const results = range(0, iterationCount).map(() => randomNumber(minValue, maxValue));
+
 		const counts = possibilities.map((possibility) =>
 		 results.filter((result) => result === possibility).length);
-
 		const minCount = Math.min(...counts);
 		const maxCount = Math.max(...counts);
 		const difference = maxCount - minCount;
@@ -66,15 +67,15 @@ describe('PlayerManager ', () => {
 	});
 
 	test('Randomized test for character', () => {
-		const minValue = 65;
-		const maxValue = 90;
-		const possibilities = range(minValue, maxValue).map((number) => character(number));
+		const possibilities = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
 		const iterationCount = 100000;
-		const acceptableErrorMargin = 10 / 100;
+		const acceptableErrorMargin = 0.1;
+
 		const results = range(0, iterationCount).map(() => randomCharacter());
+
 		const counts = possibilities.map((possibility) =>
 		 results.filter((result) => result === possibility).length);
-
 		const minCount = Math.min(...counts);
 		const maxCount = Math.max(...counts);
 		const difference = maxCount - minCount;
@@ -83,6 +84,23 @@ describe('PlayerManager ', () => {
 		console.log(results);
 		console.log(counts);
 		console.log(possibilities);
+
+		expect(obtainedErrorMargin).toBeLessThan(acceptableErrorMargin);
+	});
+
+	test('RandomValue - to get a randomValue', () => {
+		const possibilities = ['a', 'g', '5', '9', '7', '3', 'h'];
+		const iterationCount = 100000;
+		const acceptableErrorMargin = 0.1;
+
+		const results = range(0, iterationCount).map(() => randomValue(possibilities));
+
+		const counts = possibilities.map((possibility) =>
+		 results.filter((result) => result === possibility).length);
+		const minCount = Math.min(...counts);
+		const maxCount = Math.max(...counts);
+		const difference = maxCount - minCount;
+		const obtainedErrorMargin = (difference / 2) * possibilities.length / iterationCount;
 
 		expect(obtainedErrorMargin).toBeLessThan(acceptableErrorMargin);
 	});

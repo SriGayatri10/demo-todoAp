@@ -7,13 +7,6 @@ const rndNumber = (max, min) =>
 const randomNumber = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1)) + min;
 
-const randomizedNumber = () => {
-	const array = [];
-
-	for(let i = 0; i < 10000; i++)
-		array.push(randomNumber(0, 100));
-	return array;
-};
 const randomCharacter = () => {
 	const number = randomNumber(65, 90);
 	const character = String.fromCharCode(number);
@@ -21,14 +14,13 @@ const randomCharacter = () => {
 	return character;
 };
 
-const character = (number) => String.fromCharCode(number);
+const randomValue = (array) => array[randomNumber(0, array.length - 1)];
 
 const PlayerManager = {
 	rndNumber,
 	randomNumber,
-	randomizedNumber,
-	character,
 	randomCharacter,
+	randomValue,
 };
 
 export default PlayerManager;
