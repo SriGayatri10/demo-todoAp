@@ -52,7 +52,6 @@ describe('todoManager', () => {
 			{ ...impactedTodo, isCompleted: !impactedTodo.isCompleted },
 			unImpactedTodo,
 		];
-
 		const result = toggleTodo(existingTodos, impactedTodo);
 
 		expect(result).toEqual(expectation);
