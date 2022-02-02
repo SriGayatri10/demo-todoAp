@@ -18,7 +18,7 @@ describe('ActionButton', () => {
 		const { getByRole } = render(actionButton(context));
 
 		expect(getByRole('editButton')).toBeInTheDocument();
-		expect(editButton.default).toHaveBeenCalledWith();
+		expect(editButton.default).toHaveBeenCalledWith(context);
 	});
 	test('AddButton', () => {
 		const context = {
@@ -32,6 +32,6 @@ describe('ActionButton', () => {
 		const { getByRole } = render(actionButton(context));
 
 		expect(getByRole('AddButton')).toBeInTheDocument();
-		expect(AddButton.default).toHaveBeenCalledWith();
+		expect(AddButton.default).toHaveBeenCalledWith(context);
 	});
 });

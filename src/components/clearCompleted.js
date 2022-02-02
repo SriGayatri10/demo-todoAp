@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { React } from 'react';
-import context from '../core/context';
 import TodoManager from '../services/todoManager';
 
-const clearCompleted = () => {
+const clearCompleted = (context) => {
 	const notCompleted = TodoManager.getCompletedCount(context.state.todos)
 	 === 0;
 
