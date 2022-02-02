@@ -1,15 +1,20 @@
 import { React } from 'react';
-import context from '../core/context';
 
-const AddButton = () =>
-	<button
-		role="addButton"
-		disabled={ context.state.input === '' }
-		onClick={ () => {
-			context.actions.addTodo();
-		} }
-	>
-		Add
-	</button>;
+const AddButton = (context) => {
+	const { state, actions } = context;
+
+	return (
+		<button
+			role="addButton"
+			disabled={ state.input === '' }
+			onClick={ () => {
+				actions.addTodo();
+			} }
+		>
+			Add
+		</button>
+
+	);
+};
 
 export default AddButton;
