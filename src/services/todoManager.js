@@ -29,8 +29,8 @@ const getActiveTodos = (todos) => todos.length;
 const removeTodo = (todos, todoTobeRemoved) =>
 	todos.filter((todo) => todo.id !== todoTobeRemoved.id);
 
-const getCompletedCount = (todos) =>
-	todos.filter((todo) => todo.isCompleted).length;
+const hasCompletedTodos = (todos) =>
+	todos.filter((todo) => todo.isCompleted).length === 0;
 
 const clearCompleted = (todos) =>
 	todos.filter((todo) => !todo.isCompleted);
@@ -63,7 +63,7 @@ const TodoManager = {
 	getActiveChecked,
 	getActiveTodos,
 	removeTodo,
-	getCompletedCount,
+	hasCompletedTodos,
 	clearCompleted,
 	getTodosCount,
 	setFilter,

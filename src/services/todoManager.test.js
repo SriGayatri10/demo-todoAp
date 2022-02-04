@@ -6,7 +6,7 @@ import config from '../core/config';
 
 describe('todoManager', () => {
 	const { addTodo, hasInput, toggleTodo, toggleAllTodos, getActiveChecked,
-		getActiveTodos, removeTodo, getCompletedCount, clearCompleted,
+		getActiveTodos, removeTodo, hasCompletedTodos, clearCompleted,
 		getTodosCount, setFilter, editTodo } = TodoManager;
 
 	const getId = () => Symbol('id');
@@ -103,14 +103,10 @@ describe('todoManager', () => {
 		expect(afterTodoRemoval).toEqual([unImpactedTodo]);
 	});
 
-	test('CompletedCount - gets the count of clearCompleted', () => {
-		const activeTodosCount = (todos) =>
-			todos.filter((todo) => !todo.isCompleted).length;
-		const inactiveTodosCount = existingTodos.length
-		- activeTodosCount(existingTodos);
-		const length = getCompletedCount(existingTodos);
+	test('HasCompletedTodos - checks whether todos are completed', () => {
+		const result = hasCompletedTodos(existingTodos);
 
-		expect(length).toEqual(inactiveTodosCount);
+		expect(result).toEqual(true);
 	});
 
 	test('Clear Completed', () => {
