@@ -5,7 +5,7 @@ import { random } from '@laufire/utils';
 import config from '../core/config';
 
 describe('todoManager', () => {
-	const { addTodo, toggleTodo, toggleAllTodos, getActiveChecked,
+	const { addTodo, hasInput, toggleTodo, toggleAllTodos, getActiveChecked,
 		getActiveTodos, removeTodo, getCompletedCount, clearCompleted,
 		getTodosCount, setFilter, editTodo } = TodoManager;
 
@@ -45,6 +45,19 @@ describe('todoManager', () => {
 
 		expect(random.rndString).toHaveBeenCalledWith(config.refreshIDLength);
 		expect(result).toEqual([...existingTodos, newTodo]);
+	});
+	describe('isInput', () => {
+		test('isInput is true', () => {
+			const result = hasInput('');
+
+			expect(result).toEqual(true);
+		});
+
+		test('isInput is false', () => {
+			const result = hasInput(Symbol('input'));
+
+			expect(result).toEqual(false);
+		});
 	});
 
 	test('Toggle Todo', () => {

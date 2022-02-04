@@ -7,6 +7,8 @@ const addTodo = (todos, input) => todos.concat({
 	isCompleted: false,
 });
 
+const hasInput = (input) => input === '';
+
 const toggleTodo = (todos, data) => todos.map((todo) =>
 	(todo.id !== data.id
 		? todo
@@ -55,16 +57,18 @@ const editTodo = (
 
 const TodoManager = {
 	addTodo,
+	hasInput,
 	toggleTodo,
 	toggleAllTodos,
-	getActiveTodos,
 	getActiveChecked,
+	getActiveTodos,
 	removeTodo,
 	getCompletedCount,
 	clearCompleted,
 	getTodosCount,
 	setFilter,
 	editTodo,
+
 };
 
 export default TodoManager;
