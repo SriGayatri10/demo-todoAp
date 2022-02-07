@@ -12,43 +12,42 @@ describe('clearCompleted', () => {
 		},
 	};
 
-	test('notCompleted is true', () => {
+	test('Not visible when no todos are completed', () => {
 		jest.spyOn(TodoManager, 'hasCompletedTodos')
 			.mockReturnValue(true);
 
 		const component = clearCompleted(context);
 
-		expect(component).not.toBeInTheDocument();
 		expect(TodoManager.hasCompletedTodos)
 			.toHaveBeenCalledWith(context.state.todos);
+		expect(component).not.toBeInTheDocument();
 	});
 
-	describe('notCompleted is false', () => {
-		test('Dom Check', () => {
-			jest.spyOn(TodoManager, 'hasCompletedTodos')
-				.mockReturnValue(false);
+	test('Visible when some todos are completed', () => {
+		jest.spyOn(TodoManager, 'hasCompletedTodos')
+			.mockReturnValue(false);
 
-			const component = render(clearCompleted(context))
-				.getByRole('clearCompleted');
+		const component = render(clearCompleted(context))
+			.getByRole('clearCompleted');
 
-			expect(component).toBeInTheDocument();
-			expect(component).toHaveTextContent('clearcompleted');
-			expect(TodoManager.hasCompletedTodos)
-				.toHaveBeenCalledWith(context.state.todos);
-		});
+		expect(TodoManager.hasCompletedTodos)
+			.toHaveBeenCalledWith(context.state.todos);
+		expect(component).toBeInTheDocument();
+		expect(component).toHaveTextContent('clearcompleted');
+	});
 
-		test('On Click', () => {
-			jest.spyOn(TodoManager, 'hasCompletedTodos')
-				.mockReturnValue(false);
+	test('Clears all completed todos when clicked', () => {
+		jest.spyOn(TodoManager, 'hasCompletedTodos')
+			.mockReturnValue(false);
 
-			const component = render(clearCompleted(context))
-				.getByRole('clearCompleted');
+		const component = render(clearCompleted(context))
+			.getByRole('clearCompleted');
 
-			fireEvent.click(component);
-			expect(context.actions.getClearCompleted)
-				.toHaveBeenCalledWith();
-			expect(TodoManager.hasCompletedTodos)
-				.toHaveBeenCalledWith(context.state.todos);
-		});
+		fireEvent.click(component);
+
+		expect(TodoManager.hasCompletedTodos)
+			.toHaveBeenCalledWith(context.state.todos);
+		expect(context.actions.getClearCompleted)
+			.toHaveBeenCalledWith();
 	});
 });
