@@ -20,11 +20,12 @@ const toggleTodo = (todos, data) => todos.map((todo) =>
 const toggleAllTodos = (todos, ischecked) =>
 	todos.map((todo) => ({ ...todo, isCompleted: ischecked }));
 
-const getActiveChecked = (todos) =>
-	todos.filter((todo) => !todo.isCompleted).length;
+const hasNoActiveTodos = (todos) =>
+	todos.filter((todo) => !todo.isCompleted).length === 0;
+
+const hasNoTodos = (todos) => todos.length === 0;
 
 // eslint-disable-next-line arrow-body-style
-const getActiveTodos = (todos) => todos.length;
 
 const removeTodo = (todos, todoTobeRemoved) =>
 	todos.filter((todo) => todo.id !== todoTobeRemoved.id);
@@ -60,8 +61,8 @@ const TodoManager = {
 	hasInput,
 	toggleTodo,
 	toggleAllTodos,
-	getActiveChecked,
-	getActiveTodos,
+	hasNoActiveTodos,
+	hasNoTodos,
 	removeTodo,
 	hasCompletedTodos,
 	clearCompleted,

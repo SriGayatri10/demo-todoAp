@@ -5,8 +5,8 @@ import { random } from '@laufire/utils';
 import config from '../core/config';
 
 describe('todoManager', () => {
-	const { addTodo, hasInput, toggleTodo, toggleAllTodos, getActiveChecked,
-		getActiveTodos, removeTodo, hasCompletedTodos, clearCompleted,
+	const { addTodo, hasInput, toggleTodo, toggleAllTodos, hasNoActiveTodos,
+		hasNoTodos, removeTodo, hasCompletedTodos, clearCompleted,
 		getTodosCount, setFilter, editTodo } = TodoManager;
 
 	const getId = () => Symbol('id');
@@ -81,20 +81,16 @@ describe('todoManager', () => {
 		});
 	});
 
-	test('getActiveChecked - Getting No of activeTodos present', () => {
-		const inactiveTodosCount = (todos) =>
-			todos.filter((todo) => todo.isCompleted).length;
-		const activeTodosCount = existingTodos.length
-		- inactiveTodosCount(existingTodos);
-		const noOfActiveTodos = getActiveChecked(existingTodos);
+	test('HasActiveTodos - Check whether any activeTodos present', () => {
+		const result = hasNoActiveTodos(existingTodos);
 
-		expect(noOfActiveTodos).toEqual(activeTodosCount);
+		expect(result).toEqual(false);
 	});
 
-	test('Obtaining length of activeTodos', () => {
-		const length = getActiveTodos(existingTodos);
+	test('HasNOTodos - Check whether the array is empty', () => {
+		const result = hasNoTodos(existingTodos);
 
-		expect(length).toEqual(existingTodos.length);
+		expect(result).toEqual(false);
 	});
 
 	test('Remove Todo - removes the selected todo', () => {
