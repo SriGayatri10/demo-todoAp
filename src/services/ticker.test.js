@@ -14,11 +14,9 @@ test('Ticker ', () => {
 	};
 
 	const tasks = { map: jest.fn() };
-	const addedTasks = { map: jest.fn() };
 	const setIntervalMock = (Fn) => Fn();
 
 	jest.spyOn(TaskRetriver, 'getTasks').mockReturnValue(tasks);
-	jest.spyOn(tasks, 'map').mockReturnValue(addedTasks);
 	jest.spyOn(global, 'setInterval').mockImplementation(setIntervalMock);
 
 	Ticker.start(context);
