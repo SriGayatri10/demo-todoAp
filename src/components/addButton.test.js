@@ -12,21 +12,19 @@ describe('AddButton', () => {
 		},
 	};
 
-	describe('To check onClick', () => {
-		test('dom Check', () => {
-			const component = render(AddButton(context)).getByRole('addButton');
+	test('idle AddButton', () => {
+		const component = render(AddButton(context)).getByRole('addButton');
 
-			expect(component).toHaveTextContent('Add');
+		expect(component).toHaveTextContent('Add');
 
-			expect(component).toBeInTheDocument();
-		});
+		expect(component).toBeInTheDocument();
+	});
 
-		test('On Click', () => {
-			const component = render(AddButton(context)).getByRole('addButton');
+	test('AddButton On Click', () => {
+		const component = render(AddButton(context)).getByRole('addButton');
 
-			fireEvent.click(component);
-			expect(context.actions.addTodo).toHaveBeenCalledWith();
-		});
+		fireEvent.click(component);
+		expect(context.actions.addTodo).toHaveBeenCalledWith();
 	});
 
 	describe('Disable Check', () => {
