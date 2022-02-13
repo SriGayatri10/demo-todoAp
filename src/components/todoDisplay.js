@@ -1,17 +1,21 @@
+/* eslint-disable max-len */
 import { React } from 'react';
-import context from '../core/context';
 
-const todoDisplay = (todo) => <div key={ todo.id }>
+const todoDisplay = ({ actions, data: todo }) => <div key={ todo.id }role="todoDisplay">
 	<input
+		role="toggleTodo"
 		type="checkbox"
 		checked={ todo.isCompleted }
-		onChange={ () => context.actions.toggleTodo(todo) }
+		onChange={ () => actions.toggleTodo(todo) }
 	/>
-	<span onClick={ () => context.actions.setEditing(todo) }>
+	<span
+		role="setEditing"
+		onClick={ () => actions.setEditing(todo) }
+	>
 		{ todo.text }
 	</span>
-	<span>
-		<button onClick={ () => context.actions.removeTodo(todo) }>X</button>
+	<span role="removeTodo">
+		<button role="removeButton" onClick={ () => actions.removeTodo(todo) }>X</button>
 	</span>
 </div>;
 
