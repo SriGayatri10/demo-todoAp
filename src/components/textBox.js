@@ -1,24 +1,24 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { React } from 'react';
-import context from '../core/context';
 
-const getEnterKeyAction = () =>
+const getEnterKeyAction = (context) =>
 	(context.state.editing ? 'editTodo' : 'addTodo');
 
 const actionKeys = {
-	Enter: () => context.actions[getEnterKeyAction()](),
-	Escape: () => context.actions.setInput(''),
+	Enter: (context) => context.actions[getEnterKeyAction(context)](context),
+	Escape: (context) => context.actions.setInput(''),
 };
 
-const textBox = () =>
+const textBox = (context) =>
 	<input
+		role="textBox"
 		type="text"
 		 value={ context.state.input }
 		onChange={ (evt) => {
 			context.actions.setInput(evt.target.value);
 		} }
 		onKeyUp={ (evt) => {
-			actionKeys[evt.code] && actionKeys[evt.code]();
+			actionKeys[evt.code] && actionKeys[evt.code](context);
 		} }
 	/>;
 
