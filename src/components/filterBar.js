@@ -1,10 +1,9 @@
-import { React } from 'react';
 import filterButton from './filterButton.js';
 
-const filterBar = () => {
+const filterBar = (context) => {
 	const filters = ['All', 'Active', 'Completed'];
 
-	return <div role="filterBar">{filters.map(filterButton)}</div>;
+	return filters.map((filter) => filterButton({ ...context, data: filter }));
 };
 
 export default filterBar;
