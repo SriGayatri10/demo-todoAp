@@ -112,9 +112,9 @@ describe('todoManager', () => {
 	});
 
 	test('TodosCount- Count the no of todos', () => {
-		const length = getTodosCount(existingTodos);
+		const result = getTodosCount(existingTodos);
 
-		expect(length).toEqual(existingTodos.length);
+		expect(result).toEqual(false);
 	});
 
 	test('setFilter - set a particular filter which is required', () => {

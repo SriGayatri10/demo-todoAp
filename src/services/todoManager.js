@@ -36,7 +36,7 @@ const hasCompletedTodos = (todos) =>
 const clearCompleted = (todos) =>
 	todos.filter((todo) => !todo.isCompleted);
 
-const getTodosCount = (data) => data.length;
+const getTodosCount = (data) => data.length === 0;
 
 const filters = {
 	All: () => true,
