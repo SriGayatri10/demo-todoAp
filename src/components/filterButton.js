@@ -1,15 +1,16 @@
 import { React } from 'react';
-import context from '../core/context';
+
 import TodoManager from '../services/todoManager';
 
-const filterButton = (filter) => {
-	const isTodos = TodoManager.getTodosCount(context.state.todos) === 0;
+const filterButton = ({ actions, state, data: filter }) => {
+	const isTodos = TodoManager.getTodosCount(state.todos);
 
 	return isTodos
 		? null
-		: <span role="filterButton">
+		: <span>
 			<button
-				onClick={ () => context.actions.setFilter(filter) }
+				role="filterButton"
+				onClick={ () => actions.setFilter(filter) }
 			>
 				{filter}</button>
 		</span>;
