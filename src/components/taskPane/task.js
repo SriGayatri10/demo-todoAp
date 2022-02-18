@@ -1,26 +1,27 @@
 import { React } from 'react';
-import context from '../../core/context';
 
-const addButton = (task) =>
+const addButton = (actions, task) =>
 	<button
+		role="addButton"
 		onClick={ () => {
-			context.actions.addTaskTodo(task);
-			context.actions.removeTask(task);
+			actions.addTaskTodo(task);
+			actions.removeTask(task);
 		} }
 	> + </button>;
 
-const removeButton = (task) =>
+const removeButton = (actions, task) =>
 	<button
-		onClick={ () => context.actions.removeTask(task) }
+		role="removeButton"
+		onClick={ () => actions.removeTask(task) }
 	> x </button>;
 
-const Task = (task) => {
+const Task = ({ actions, data: task }) => {
 	const { id, text } = task;
 
-	return <div key={ id }>
-		<span>{addButton(task)}</span>
+	return <div key={ id } role="Task">
+		<span>{addButton(actions, task)}</span>
 		<span>{text}</span>
-		<span>{removeButton(task)}</span></div>;
+		<span>{removeButton(actions, task)}</span></div>;
 };
 
 export default Task;

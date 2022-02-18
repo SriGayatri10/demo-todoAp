@@ -1,14 +1,10 @@
-import { React } from 'react';
-import context from '../../core/context';
 
-import task from './task.js';
+import Task from './task.js';
 
-const TaskList = () => {
+const TaskList = (context) => {
 	const { tasks } = context.state;
 
-	return <div>
-		{ tasks.map(task) }
-	</div>;
+	return tasks.map((eachTask) => Task({ ...context, data: eachTask }));
 };
 
 export default TaskList;
