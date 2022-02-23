@@ -27,6 +27,7 @@ describe('Task', () => {
 
 		fireEvent.click(component);
 
+		expect(component).toBeInTheDocument();
 		expect(context.actions.addTaskTodo)
 			.toHaveBeenCalledWith(task);
 		expect(context.actions.removeTask)
@@ -40,6 +41,7 @@ describe('Task', () => {
 
 		fireEvent.click(component);
 
+		expect(component).toBeInTheDocument();
 		expect(context.actions.removeTask)
 			.toHaveBeenCalledWith(task);
 		expect(component).toHaveTextContent('x');
