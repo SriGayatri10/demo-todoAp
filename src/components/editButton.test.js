@@ -12,46 +12,43 @@ describe('editButton', () => {
 		},
 	};
 
-	describe('To check onClick', () => {
-		test('dom Check', () => {
-			const component = render(editButton(context))
-				.getByRole('editButton');
+	test('To display editButton', () => {
+		const component = render(editButton(context))
+			.getByRole('editButton');
 
-			expect(component).toHaveTextContent('edit');
+		expect(component).toHaveTextContent('edit');
 
-			expect(component).toBeInTheDocument();
-		});
-
-		test('On Click', () => {
-			const component = render(editButton(context))
-				.getByRole('editButton');
-
-			fireEvent.click(component);
-			expect(context.actions.editTodo).toHaveBeenCalledWith();
-		});
+		expect(component).toBeInTheDocument();
 	});
-	describe('Disable Check', () => {
-		test('Disabled Condition - disabled is true', () => {
-			jest.spyOn(TodoManager, 'hasInput')
-				.mockReturnValue(true);
 
-			const component = render(editButton(context))
-				.getByRole('editButton');
+	test('OnClicking the EditButton', () => {
+		const component = render(editButton(context))
+			.getByRole('editButton');
 
-			expect(component).toBeDisabled();
-			expect(TodoManager.hasInput)
-				.toHaveBeenCalledWith(context.state.input);
-		});
-		test('Enable Condition - disabled is false', () => {
-			jest.spyOn(TodoManager, 'hasInput')
-				.mockReturnValue(false);
+		fireEvent.click(component);
+		expect(context.actions.editTodo).toHaveBeenCalledWith();
+	});
 
-			const component = render(editButton(context))
-				.getByRole('editButton');
+	test('Disabled Condition - when value of disabled becomes true', () => {
+		jest.spyOn(TodoManager, 'hasInput')
+			.mockReturnValue(true);
 
-			expect(component).not.toBeDisabled();
-			expect(TodoManager.hasInput)
-				.toHaveBeenCalledWith(context.state.input);
-		});
+		const component = render(editButton(context))
+			.getByRole('editButton');
+
+		expect(component).toBeDisabled();
+		expect(TodoManager.hasInput)
+			.toHaveBeenCalledWith(context.state.input);
+	});
+	test('Enabled Condition - when value of disabled becomes false', () => {
+		jest.spyOn(TodoManager, 'hasInput')
+			.mockReturnValue(false);
+
+		const component = render(editButton(context))
+			.getByRole('editButton');
+
+		expect(component).not.toBeDisabled();
+		expect(TodoManager.hasInput)
+			.toHaveBeenCalledWith(context.state.input);
 	});
 });

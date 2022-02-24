@@ -23,55 +23,52 @@ describe('ToggleAll', () => {
 		expect(component).not.toBeInTheDocument();
 	});
 
-	describe('ToggleAll is visible when some ToDos are selected', () => {
-		test('Dom check', () => {
-			jest.spyOn(TodoManager, 'hasNoTodos').mockReturnValue(false);
-			const component = render(toggleAll(context))
-				.getByRole('toggleAll');
+	test('ToggleAll is visible when some ToDos are selected', () => {
+		jest.spyOn(TodoManager, 'hasNoTodos').mockReturnValue(false);
+		const component = render(toggleAll(context))
+			.getByRole('toggleAll');
 
-			expect(TodoManager.hasNoTodos)
-				.toHaveBeenCalledWith(context.state.todos);
-			expect(component).toBeInTheDocument();
-		});
-		describe('On Click', () => {
-			test('when toggleAll is selected,all todos are selected & vice verse', () => {
-				const isChecked = false;
+		expect(TodoManager.hasNoTodos)
+			.toHaveBeenCalledWith(context.state.todos);
+		expect(component).toBeInTheDocument();
+	});
 
-				jest.spyOn(TodoManager, 'hasNoActiveTodos')
-					.mockReturnValue(isChecked);
-				jest.spyOn(TodoManager, 'hasNoTodos')
-					.mockReturnValue(false);
+	test('when toggleAll is selected,all todos are selected & vice verse', () => {
+		const isChecked = false;
 
-				const component = render(toggleAll(context))
-					.getByRole('toggleAll');
+		jest.spyOn(TodoManager, 'hasNoActiveTodos')
+			.mockReturnValue(isChecked);
+		jest.spyOn(TodoManager, 'hasNoTodos')
+			.mockReturnValue(false);
 
-				fireEvent.click(component);
+		const component = render(toggleAll(context))
+			.getByRole('toggleAll');
 
-				expect(TodoManager.hasNoActiveTodos)
-					.toHaveBeenCalledWith(context.state.todos);
-				expect(context.actions.toggleAllTodos)
-					.toHaveBeenCalledWith(!isChecked);
-			});
+		fireEvent.click(component);
 
-			test('when toggleAll is unselected, all todos are unselected &', () => {
-				const isChecked = true;
+		expect(TodoManager.hasNoActiveTodos)
+			.toHaveBeenCalledWith(context.state.todos);
+		expect(context.actions.toggleAllTodos)
+			.toHaveBeenCalledWith(!isChecked);
+	});
 
-				jest.spyOn(TodoManager, 'hasNoActiveTodos')
-					.mockReturnValue(isChecked);
-				jest.spyOn(TodoManager, 'hasNoTodos')
-					.mockReturnValue(false);
+	test('when toggleAll is unselected, all todos are unselected &', () => {
+		const isChecked = true;
 
-				const component = render(toggleAll(context))
-					.getByRole('toggleAll');
+		jest.spyOn(TodoManager, 'hasNoActiveTodos')
+			.mockReturnValue(isChecked);
+		jest.spyOn(TodoManager, 'hasNoTodos')
+			.mockReturnValue(false);
 
-				fireEvent.click(component);
+		const component = render(toggleAll(context))
+			.getByRole('toggleAll');
 
-				expect(TodoManager.hasNoActiveTodos)
-					.toHaveBeenLastCalledWith(context.state.todos);
+		fireEvent.click(component);
 
-				expect(context.actions.toggleAllTodos)
-					.toHaveBeenCalledWith(!isChecked);
-			});
-		});
+		expect(TodoManager.hasNoActiveTodos)
+			.toHaveBeenLastCalledWith(context.state.todos);
+
+		expect(context.actions.toggleAllTodos)
+			.toHaveBeenCalledWith(!isChecked);
 	});
 });

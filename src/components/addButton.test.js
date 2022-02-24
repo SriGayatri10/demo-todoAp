@@ -27,26 +27,24 @@ describe('AddButton', () => {
 		expect(context.actions.addTodo).toHaveBeenCalledWith();
 	});
 
-	describe('Disable Check', () => {
-		test('Disabled Condition - disabled is true', () => {
-			jest.spyOn(TodoManager, 'hasInput')
-				.mockReturnValue(true);
+	test('Disabled Condition - when value of disabled becomes true', () => {
+		jest.spyOn(TodoManager, 'hasInput')
+			.mockReturnValue(true);
 
-			const component = render(AddButton(context)).getByRole('addButton');
+		const component = render(AddButton(context)).getByRole('addButton');
 
-			expect(component).toBeDisabled();
-			expect(TodoManager.hasInput)
-				.toHaveBeenCalledWith(context.state.input);
-		});
-		test('Enable Condition - disabled is false', () => {
-			jest.spyOn(TodoManager, 'hasInput')
-				.mockReturnValue(false);
+		expect(component).toBeDisabled();
+		expect(TodoManager.hasInput)
+			.toHaveBeenCalledWith(context.state.input);
+	});
+	test('Enabled Condition - when value of disabled becomes false', () => {
+		jest.spyOn(TodoManager, 'hasInput')
+			.mockReturnValue(false);
 
-			const component = render(AddButton(context)).getByRole('addButton');
+		const component = render(AddButton(context)).getByRole('addButton');
 
-			expect(component).not.toBeDisabled();
-			expect(TodoManager.hasInput)
-				.toHaveBeenCalledWith(context.state.input);
-		});
+		expect(component).not.toBeDisabled();
+		expect(TodoManager.hasInput)
+			.toHaveBeenCalledWith(context.state.input);
 	});
 });
