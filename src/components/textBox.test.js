@@ -38,6 +38,7 @@ describe('TextBox', () => {
 		const component = render(textBox(context)).getByRole('textBox');
 
 		fireEvent.keyUp(component, { code });
+
 		expect(context.actions.addTodo).not.toHaveBeenCalledWith(context);
 		expect(context.actions.editTodo).not.toHaveBeenCalledWith(context);
 		expect(context.actions.setInput).not.toHaveBeenCalledWith(context);
@@ -94,6 +95,7 @@ describe('Action Keys', () => {
 		const component = render(textBox(context)).getByRole('textBox');
 
 		fireEvent.keyUp(component, { code });
+
 		expect(context.actions.setInput)
 			.toHaveBeenCalledWith('');
 	});

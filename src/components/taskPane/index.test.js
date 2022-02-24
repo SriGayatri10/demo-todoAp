@@ -12,6 +12,7 @@ test('TaskPane', () => {
 
 	jest.spyOn(TaskList, 'default')
 		.mockReturnValue(<div role="TaskList"/>);
+
 	const { getByRole } = render(TaskPane(context));
 
 	expect(getByRole('TaskPane')).toBeInTheDocument();

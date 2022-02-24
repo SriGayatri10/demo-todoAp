@@ -16,6 +16,7 @@ describe('FilterButton', () => {
 	test('filterButtons is not visible when no todos present', () => {
 		jest.spyOn(TodoManager, 'getTodosCount')
 			.mockReturnValue(true);
+
 		const component = filterButton({ ...context, data: Symbol('filter') });
 
 		expect(component).not.toBeInTheDocument();
@@ -27,14 +28,15 @@ describe('FilterButton', () => {
 		jest.spyOn(TodoManager, 'getTodosCount')
 			.mockReturnValue(false);
 
-		const component = render(filterButton({ ...context, data: Symbol('filter') }))
+		const component = render(filterButton({ ...context, data: 'filterType' }))
 			.getByRole('filterButton');
 
 		expect(TodoManager.getTodosCount)
 			.toHaveBeenCalledWith(context.state.todos);
 		expect(component).toBeInTheDocument();
+		expect(component).toHaveTextContent('filterType');
 	});
-	test('Displays All Button', () => {
+	test('FilterButtons OnClick', () => {
 		jest.spyOn(TodoManager, 'getTodosCount')
 			.mockReturnValue(false);
 
@@ -43,34 +45,9 @@ describe('FilterButton', () => {
 
 		expect(TodoManager.getTodosCount)
 			.toHaveBeenCalledWith(context.state.todos);
+
 		fireEvent.click(component);
-		expect(component).toHaveTextContent('All');
+
 		expect(context.actions.setFilter).toHaveBeenCalledWith('All');
-	});
-
-	test('Displays Active Button', () => {
-		jest.spyOn(TodoManager, 'getTodosCount')
-			.mockReturnValue(false);
-
-		const component = render(filterButton({ ...context, data: 'Active' }))
-			.getByRole('filterButton');
-
-		expect(TodoManager.getTodosCount)
-			.toHaveBeenCalledWith(context.state.todos);
-		fireEvent.click(component);
-		expect(component).toHaveTextContent('Active');
-	});
-
-	test('Displays Completed Button', () => {
-		jest.spyOn(TodoManager, 'getTodosCount')
-			.mockReturnValue(false);
-
-		const component = render(filterButton({ ...context, data: 'Completed' }))
-			.getByRole('filterButton');
-
-		expect(TodoManager.getTodosCount)
-			.toHaveBeenCalledWith(context.state.todos);
-		fireEvent.click(component);
-		expect(component).toHaveTextContent('Completed');
 	});
 });

@@ -14,6 +14,7 @@ test('TaskList', () => {
 	const { tasks } = context.state;
 
 	jest.spyOn(Task, 'default').mockReturnValue(<div role="Task"/>);
+
 	const { getAllByRole } = render(TaskList(context));
 
 	tasks.map((eachTask, index) => {

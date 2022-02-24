@@ -25,6 +25,7 @@ describe('ToggleAll', () => {
 
 	test('ToggleAll is visible when some ToDos are selected', () => {
 		jest.spyOn(TodoManager, 'hasNoTodos').mockReturnValue(false);
+
 		const component = render(toggleAll(context))
 			.getByRole('toggleAll');
 
@@ -67,7 +68,6 @@ describe('ToggleAll', () => {
 
 		expect(TodoManager.hasNoActiveTodos)
 			.toHaveBeenLastCalledWith(context.state.todos);
-
 		expect(context.actions.toggleAllTodos)
 			.toHaveBeenCalledWith(!isChecked);
 	});

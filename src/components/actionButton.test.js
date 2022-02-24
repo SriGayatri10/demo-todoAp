@@ -15,6 +15,7 @@ describe('ActionButton', () => {
 
 		jest.spyOn(editButton, 'default')
 			.mockReturnValue(<div role="editButton"/>);
+
 		const { getByRole } = render(actionButton(context));
 
 		expect(getByRole('editButton')).toBeInTheDocument();
@@ -29,6 +30,7 @@ describe('ActionButton', () => {
 
 		jest.spyOn(AddButton, 'default')
 			.mockReturnValue(<div role="AddButton"/>);
+
 		const { getByRole } = render(actionButton(context));
 
 		expect(getByRole('AddButton')).toBeInTheDocument();

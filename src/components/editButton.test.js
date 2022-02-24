@@ -17,7 +17,6 @@ describe('editButton', () => {
 			.getByRole('editButton');
 
 		expect(component).toHaveTextContent('edit');
-
 		expect(component).toBeInTheDocument();
 	});
 
@@ -26,6 +25,7 @@ describe('editButton', () => {
 			.getByRole('editButton');
 
 		fireEvent.click(component);
+
 		expect(context.actions.editTodo).toHaveBeenCalledWith();
 	});
 

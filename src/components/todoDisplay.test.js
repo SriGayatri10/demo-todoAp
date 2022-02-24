@@ -29,6 +29,7 @@ describe('TodoDisplay with checkbox,text & removeButton', () => {
 			.getByRole('toggleTodo');
 
 		fireEvent.click(component);
+
 		expect(actions.toggleTodo).toHaveBeenCalledWith(todo);
 	});
 
@@ -37,6 +38,7 @@ describe('TodoDisplay with checkbox,text & removeButton', () => {
 			.getByRole('setEditing');
 
 		fireEvent.click(component);
+
 		expect(actions.setEditing).toHaveBeenCalledWith(todo);
 		expect(component).toHaveTextContent('Hi');
 	});
@@ -46,6 +48,7 @@ describe('TodoDisplay with checkbox,text & removeButton', () => {
 			.getByRole('removeButton');
 
 		fireEvent.click(component);
+
 		expect(component).toHaveTextContent('X');
 		expect(actions.removeTodo).toHaveBeenCalledWith(todo);
 	});

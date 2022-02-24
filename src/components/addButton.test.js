@@ -16,7 +16,6 @@ describe('AddButton', () => {
 		const component = render(AddButton(context)).getByRole('addButton');
 
 		expect(component).toHaveTextContent('Add');
-
 		expect(component).toBeInTheDocument();
 	});
 
@@ -24,6 +23,7 @@ describe('AddButton', () => {
 		const component = render(AddButton(context)).getByRole('addButton');
 
 		fireEvent.click(component);
+
 		expect(context.actions.addTodo).toHaveBeenCalledWith();
 	});
 
@@ -33,9 +33,9 @@ describe('AddButton', () => {
 
 		const component = render(AddButton(context)).getByRole('addButton');
 
-		expect(component).toBeDisabled();
 		expect(TodoManager.hasInput)
 			.toHaveBeenCalledWith(context.state.input);
+		expect(component).toBeDisabled();
 	});
 	test('Enabled Condition - when value of disabled becomes false', () => {
 		jest.spyOn(TodoManager, 'hasInput')
@@ -43,8 +43,8 @@ describe('AddButton', () => {
 
 		const component = render(AddButton(context)).getByRole('addButton');
 
-		expect(component).not.toBeDisabled();
 		expect(TodoManager.hasInput)
 			.toHaveBeenCalledWith(context.state.input);
+		expect(component).not.toBeDisabled();
 	});
 });
