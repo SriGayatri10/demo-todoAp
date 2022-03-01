@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { React } from 'react';
 import { render } from '@testing-library/react';
 import actionButton from './actionButton';
@@ -6,7 +5,7 @@ import * as editButton from './editButton';
 import * as AddButton from './addButton';
 
 describe('ActionButton', () => {
-	test('EditButton', () => {
+	test('EditButton edits the todo', () => {
 		const context = {
 			state: {
 				editing: true,
@@ -21,7 +20,8 @@ describe('ActionButton', () => {
 		expect(getByRole('editButton')).toBeInTheDocument();
 		expect(editButton.default).toHaveBeenCalledWith(context);
 	});
-	test('AddButton', () => {
+
+	test('AddButton adds the todo', () => {
 		const context = {
 			state: {
 				editing: false,

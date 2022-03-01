@@ -12,7 +12,7 @@ describe('clearCompleted', () => {
 		},
 	};
 
-	test('Not visible when no todos are completed', () => {
+	test('Button not visible when no todo is completed', () => {
 		jest.spyOn(TodoManager, 'hasCompletedTodos')
 			.mockReturnValue(true);
 
@@ -23,7 +23,7 @@ describe('clearCompleted', () => {
 		expect(component).not.toBeInTheDocument();
 	});
 
-	test('Visible when some todos are completed', () => {
+	test('Button visible when some todos are completed', () => {
 		jest.spyOn(TodoManager, 'hasCompletedTodos')
 			.mockReturnValue(false);
 
@@ -33,10 +33,9 @@ describe('clearCompleted', () => {
 		expect(TodoManager.hasCompletedTodos)
 			.toHaveBeenCalledWith(context.state.todos);
 		expect(component).toBeInTheDocument();
-		expect(component).toHaveTextContent('clearcompleted');
 	});
 
-	test('Clears all completed todos when clicked', () => {
+	test('OnClick clears all the completed todos', () => {
 		jest.spyOn(TodoManager, 'hasCompletedTodos')
 			.mockReturnValue(false);
 

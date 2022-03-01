@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-expressions */
 import todoDisplay from './todoDisplay';
 import { fireEvent, render } from '@testing-library/react';
 
-describe('TodoDisplay with checkbox,text & removeButton', () => {
+describe('TodoDisplay', () => {
 	const context = {
 		actions: {
 			toggleTodo: jest.fn(),
@@ -12,19 +11,19 @@ describe('TodoDisplay with checkbox,text & removeButton', () => {
 	};
 	const todo = {
 		id: expect.any(String),
-		text: 'Hi',
+		text: Symbol('text'),
 		isCompleted: false,
 	};
 	const { actions } = context;
 
-	test('todoDisplay-displays the todo', () => {
+	test('Displays checkbox, text & removeButton', () => {
 		const component = render(todoDisplay({ ...context, data: todo }))
 			.getByRole('todoDisplay');
 
 		expect(component).toBeInTheDocument();
 	});
 
-	test('toggleTodo', () => {
+	test('toggleTodo - toggles the todo', () => {
 		const component = render(todoDisplay({ ...context, data: todo }))
 			.getByRole('toggleTodo');
 
@@ -33,14 +32,13 @@ describe('TodoDisplay with checkbox,text & removeButton', () => {
 		expect(actions.toggleTodo).toHaveBeenCalledWith(todo);
 	});
 
-	test('setEditing - edits the todo present', () => {
+	test('setEditing - edits the todo', () => {
 		const component = render(todoDisplay({ ...context, data: todo }))
 			.getByRole('setEditing');
 
 		fireEvent.click(component);
 
 		expect(actions.setEditing).toHaveBeenCalledWith(todo);
-		expect(component).toHaveTextContent('Hi');
 	});
 
 	test('removeTodo- removes the particular todo from the document', () => {
@@ -49,7 +47,6 @@ describe('TodoDisplay with checkbox,text & removeButton', () => {
 
 		fireEvent.click(component);
 
-		expect(component).toHaveTextContent('X');
 		expect(actions.removeTodo).toHaveBeenCalledWith(todo);
 	});
 });

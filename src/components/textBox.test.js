@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import textBox from './textBox';
 import { random } from '@laufire/utils';
 import { fireEvent, render } from '@testing-library/react';
@@ -15,14 +14,15 @@ describe('TextBox', () => {
 		},
 	};
 
-	test('TextBox to be in the Document', () => {
+	test('Displays textBox', () => {
 		const component = render(textBox(context)).getByRole('textBox');
 
 		expect(component).toBeInTheDocument();
 	});
 
-	test('setInput - to set the input', () => {
-		const value = 'Hi';
+	test('SetInput - sets the input', () => {
+		const eight = 8;
+		const value = random.rndString(eight);
 		const component = render(textBox(context)).getByRole('textBox');
 
 		fireEvent.change(component, { target: {
@@ -33,6 +33,7 @@ describe('TextBox', () => {
 			.toHaveBeenCalledWith(value);
 	});
 
+	// eslint-disable-next-line max-len
 	test('No actions should be performed when key is neither enter nor escape', () => {
 		const code = random.rndString(1);
 		const component = render(textBox(context)).getByRole('textBox');

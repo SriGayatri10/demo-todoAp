@@ -1,3 +1,4 @@
+import { random } from '@laufire/utils';
 import { fireEvent, render } from '@testing-library/react';
 import Task from './task';
 
@@ -8,20 +9,21 @@ describe('Task', () => {
 			removeTask: jest.fn(),
 		},
 	};
+	const sixteen = 16;
 	const task = {
 		id: '',
-		text: 'Program circuit',
+		text: random.rndString(sixteen),
 	};
 
-	test('Displays the AddButton,text & RemoveButton', () => {
+	test('Task displays the AddButton, text & RemoveButton', () => {
 		const component = render(Task({ ...context, data: task }))
 			.getByRole('Task');
 
 		expect(component).toBeInTheDocument();
-		expect(component).toHaveTextContent('Program circuit');
+		expect(component).toHaveTextContent(task.text);
 	});
 
-	test('OnClicking the AddButton', () => {
+	test('AddButton adds task in todos & removes task from tasks', () => {
 		const component = render(Task({ ...context, data: task }))
 			.getByRole('addButton');
 
@@ -32,10 +34,9 @@ describe('Task', () => {
 			.toHaveBeenCalledWith(task);
 		expect(context.actions.removeTask)
 			.toHaveBeenCalledWith(task);
-		expect(component).toHaveTextContent('+');
 	});
 
-	test('OnClicking the RemoveButton', () => {
+	test('RemoveButton removes that specific task from tasks', () => {
 		const component = render(Task({ ...context, data: task }))
 			.getByRole('removeButton');
 
@@ -44,6 +45,5 @@ describe('Task', () => {
 		expect(component).toBeInTheDocument();
 		expect(context.actions.removeTask)
 			.toHaveBeenCalledWith(task);
-		expect(component).toHaveTextContent('x');
 	});
 });

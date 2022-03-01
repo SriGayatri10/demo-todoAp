@@ -15,11 +15,10 @@ describe('AddButton', () => {
 	test('idle AddButton', () => {
 		const component = render(AddButton(context)).getByRole('addButton');
 
-		expect(component).toHaveTextContent('Add');
 		expect(component).toBeInTheDocument();
 	});
 
-	test('AddButton On Click', () => {
+	test('Clicking AddButton creates a new todo in todos', () => {
 		const component = render(AddButton(context)).getByRole('addButton');
 
 		fireEvent.click(component);
@@ -27,7 +26,7 @@ describe('AddButton', () => {
 		expect(context.actions.addTodo).toHaveBeenCalledWith();
 	});
 
-	test('Disabled Condition - when value of disabled becomes true', () => {
+	test('AddButton under disabled condition', () => {
 		jest.spyOn(TodoManager, 'hasInput')
 			.mockReturnValue(true);
 
@@ -37,7 +36,8 @@ describe('AddButton', () => {
 			.toHaveBeenCalledWith(context.state.input);
 		expect(component).toBeDisabled();
 	});
-	test('Enabled Condition - when value of disabled becomes false', () => {
+
+	test('AddButton under enabled condition', () => {
 		jest.spyOn(TodoManager, 'hasInput')
 			.mockReturnValue(false);
 

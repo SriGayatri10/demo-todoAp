@@ -2,7 +2,8 @@ import { React } from 'react';
 import { render } from '@testing-library/react';
 import TaskPane from './index';
 import * as TaskList from './taskList';
-test('TaskPane', () => {
+
+test('TaskPane consists of several tasks', () => {
 	const context = {
 		actions: {},
 		state: {

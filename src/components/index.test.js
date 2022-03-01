@@ -1,5 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable max-lines-per-function */
+import { React } from 'react';
 import TodoPane from './index';
 import * as toggleAll from './toggleAll';
 import * as textBox from './textBox';

@@ -3,7 +3,7 @@ import * as filterButton from './filterButton';
 import { render } from '@testing-library/react';
 import filterBar from './filterBar';
 
-test('FilterBar', () => {
+test('FilterBar displays the filterButtons', () => {
 	const context = {
 		actions: {},
 		state: {},

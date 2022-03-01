@@ -12,15 +12,14 @@ describe('editButton', () => {
 		},
 	};
 
-	test('To display editButton', () => {
+	test('Displays editButton', () => {
 		const component = render(editButton(context))
 			.getByRole('editButton');
 
-		expect(component).toHaveTextContent('edit');
 		expect(component).toBeInTheDocument();
 	});
 
-	test('OnClicking the EditButton', () => {
+	test('Clicking EditButton will edits the todo ', () => {
 		const component = render(editButton(context))
 			.getByRole('editButton');
 
@@ -29,7 +28,7 @@ describe('editButton', () => {
 		expect(context.actions.editTodo).toHaveBeenCalledWith();
 	});
 
-	test('Disabled Condition - when value of disabled becomes true', () => {
+	test('EditButton under disabled condition', () => {
 		jest.spyOn(TodoManager, 'hasInput')
 			.mockReturnValue(true);
 
@@ -40,7 +39,8 @@ describe('editButton', () => {
 		expect(TodoManager.hasInput)
 			.toHaveBeenCalledWith(context.state.input);
 	});
-	test('Enabled Condition - when value of disabled becomes false', () => {
+
+	test('EditButton under enabled condition', () => {
 		jest.spyOn(TodoManager, 'hasInput')
 			.mockReturnValue(false);
 

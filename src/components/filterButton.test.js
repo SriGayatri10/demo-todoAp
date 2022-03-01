@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import TodoManager from '../services/todoManager';
 import filterButton from './filterButton';
 import { fireEvent, render } from '@testing-library/react';
@@ -12,35 +11,37 @@ describe('FilterButton', () => {
 			todos: [],
 		},
 	};
+	const filter = Symbol('filter');
 
-	test('filterButtons is not visible when no todos present', () => {
+	test('FilterButtons is not visible when no todo is present', () => {
 		jest.spyOn(TodoManager, 'getTodosCount')
 			.mockReturnValue(true);
 
-		const component = filterButton({ ...context, data: Symbol('filter') });
+		const component = filterButton({ ...context, data: filter });
 
 		expect(component).not.toBeInTheDocument();
 		expect(TodoManager.getTodosCount)
 			.toHaveBeenCalledWith(context.state.todos);
 	});
 
-	test('filterButtons is visible when one or more todos present ', () => {
+	test('FilterButtons is visible when one or more todos present ', () => {
 		jest.spyOn(TodoManager, 'getTodosCount')
 			.mockReturnValue(false);
 
-		const component = render(filterButton({ ...context, data: 'filterType' }))
+		// eslint-disable-next-line max-len
+		const component = render(filterButton({ ...context, data: filter }))
 			.getByRole('filterButton');
 
 		expect(TodoManager.getTodosCount)
 			.toHaveBeenCalledWith(context.state.todos);
 		expect(component).toBeInTheDocument();
-		expect(component).toHaveTextContent('filterType');
 	});
-	test('FilterButtons OnClick', () => {
+
+	test('Displays All, Active & Completed Button ', () => {
 		jest.spyOn(TodoManager, 'getTodosCount')
 			.mockReturnValue(false);
 
-		const component = render(filterButton({ ...context, data: 'All' }))
+		const component = render(filterButton({ ...context, data: filter }))
 			.getByRole('filterButton');
 
 		expect(TodoManager.getTodosCount)
@@ -48,6 +49,6 @@ describe('FilterButton', () => {
 
 		fireEvent.click(component);
 
-		expect(context.actions.setFilter).toHaveBeenCalledWith('All');
+		expect(context.actions.setFilter).toHaveBeenCalledWith(filter);
 	});
 });
